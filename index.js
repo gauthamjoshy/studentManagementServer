@@ -1,24 +1,23 @@
-// import json server
-const JSONServer = require("json-server")
+const JSONServer = require("json-server");
+const path = require("path");
 
 // create server
-const studentManagement = JSONServer.create()
+const studentManagement = JSONServer.create();
 
-// create middleware
-const middleware = JSONServer.defaults()
+// middleware
+const middleware = JSONServer.defaults();
 
-// define router
-const router = JSONServer.router("db.json")
+// router (absolute path)
+const router = JSONServer.router(path.join(__dirname, "db.json"));
 
-// define port
-const PORT = 3000 || process.env.PORT
+// correct port
+const PORT = process.env.PORT || 3000;
 
 // use middleware and router
-studentManagement.use(middleware)
-studentManagement.use(router)
+studentManagement.use(middleware);
+studentManagement.use(router);
 
 // start server
-studentManagement.listen(PORT, ()=>{
-    console.log(`JSON server started at port number : ${PORT}`);
-    
-})
+studentManagement.listen(PORT, () => {
+  console.log(`JSON Server running on port ${PORT}`);
+});
